@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HolaLinearLayout</string>
+    <string name="tv_red">red</string>
+    <string name="tv_green">green</string>
+    <string name="tv_blue">blue</string>
+    <string name="tv_yellow">yellow</string>
+    <string name="tv_one">row one</string>
+    <string name="tv_two">row two</string>
+    <string name="tv_three">row three</string>
+    <string name="tv_four">row four</string>
+</resources>
