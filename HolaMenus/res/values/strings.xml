@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HolaMenus</string>
+    <string name="hello">Presione menú y luego elija una opción</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/MnuOpc1"
+        android:icon="@drawable/ic_menu_more"
+        android:title="Opcion1">
+    </item>
+
+    <item
+        android:id="@+id/MnuOpc2"
+        android:icon="@drawable/ic_menu_my_calendar"
+        android:title="Opcion2">
+    </item>
+
+    <item
+        android:id="@+id/MnuOpc3"
+        android:icon="@drawable/ic_menu_mylocation"
+        android:title="Opcion3">
+    </item>
+
+</menu>
