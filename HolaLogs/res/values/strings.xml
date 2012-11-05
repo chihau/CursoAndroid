@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">HolaLogs</string>
+    <string name="hello">Esta aplicación genera mensajes
+        internos, para ver estos mensajes utilizar la
+        herramienta LogCat</string>
+</resources>
