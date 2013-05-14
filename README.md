@@ -30,3 +30,7 @@ Ejemplos del Curso de Desarrollo de Aplicaciones para Android.
 13) HolaArchivosFinal
 
 14) HolaLifeCycle
+
+15) HolaCamara
+
+16) HolaGPS
