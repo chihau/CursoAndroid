@@ -34,3 +34,7 @@ Ejemplos del Curso de Desarrollo de Aplicaciones para Android.
 15) HolaCamara
 
 16) HolaGPS
+
+17) HolaWebservice
+
+18) HolaWebserviceCalc
