@@ -17,3 +17,6 @@ local.properties
 
 # zip files
 *.zip
+
+# Mac OS X files
+*.DS_Store
