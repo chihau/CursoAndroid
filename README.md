@@ -1,8 +1,11 @@
 CursoAndroid
 ============
 
-Ejemplos del Curso de Desarrollo de Aplicaciones para Android.
+Este es el repositorio oficial del Curso Básico de Desarrollo de Aplicaciones para Android dictado por el profesor Chihau Chau <chihau@gmail.com>
 
+Aquí podrás encontrar los ejemplos utilizados en las clases.
+
+<!--
 1) HolaMundo
 
 2) HolaLinearLayout
@@ -38,3 +41,4 @@ Ejemplos del Curso de Desarrollo de Aplicaciones para Android.
 17) HolaWebservice
 
 18) HolaWebserviceCalc
+-->
