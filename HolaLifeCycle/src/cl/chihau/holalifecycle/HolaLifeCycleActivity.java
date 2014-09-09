@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class HolaLifeCycleActivity extends Activity {
-	static final String TAG = "HolaLifeCycleActivity";
+	final static String TAG = "HolaLifeCycleActivity";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -18,25 +18,25 @@ public class HolaLifeCycleActivity extends Activity {
 	
 	@Override
 	public void onStart() {
-    	super.onStart();
+		super.onStart();
 		Log.d(TAG, "onStart");
 	}
 	
 	@Override
 	public void onResume() {
-    	super.onResume();
+		super.onResume();
 		Log.d(TAG, "onResume");
 	}
-	
+
 	@Override
 	public void onPause() {
-    	super.onPause();
+		super.onPause();
 		Log.d(TAG, "onPause");
 	}
 	
 	@Override
 	public void onStop() {
-    	super.onStop();
+		super.onStop();
 		Log.d(TAG, "onStop");
 	}
 	
@@ -51,6 +51,4 @@ public class HolaLifeCycleActivity extends Activity {
 		super.onDestroy();
 		Log.d(TAG, "onDestroy");
 	}
-	
-	
 }
