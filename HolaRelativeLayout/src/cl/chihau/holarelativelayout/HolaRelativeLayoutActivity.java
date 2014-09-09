@@ -11,4 +11,5 @@ public class HolaRelativeLayoutActivity extends Activity {
 		
 		setContentView(R.layout.main);
 	}
+
 }

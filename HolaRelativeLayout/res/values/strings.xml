@@ -1,6 +1,8 @@
 <resources>
+
     <string name="app_name">HolaRelativeLayout</string>
-    <string name="tv">Type Here:</string>
+    <string name="tv">Type here:</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
+
 </resources>
