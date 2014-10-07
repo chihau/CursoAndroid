@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">HolaUser</string>
-    <string name="tv_nombre">Ingresa tu nombre:</string>
-    <string name="btn_saludar">Saludar</string>
-</resources>
