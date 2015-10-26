@@ -9,16 +9,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "HolaReceivers";
 
-    private TextView tvNetwork;
-    private TextView tvBattery;
+    TextView tvNetwork;
+    TextView tvBattery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
