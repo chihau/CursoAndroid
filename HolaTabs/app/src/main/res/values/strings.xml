@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HolaTabs</string>
+    <string name="tab1_texto">Contenido Tab 1</string>
+    <string name="tab2_texto">Contenido Tab 2</string>
+    <string name="tab3_texto">Contenido Tab 3</string>
+
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FF00"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/lblFragment1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:text="Fragment #1\n\nPara probar el ciclo de vida:\n
+		1) Ejecutar la aplicación\n
+		2) Presionar el botón de Inicio\n
+		3) Presionar el botón de Tareas para volver a la aplicación\n
+		4) Presionar el botón Atrás" />
+
+</LinearLayout>
