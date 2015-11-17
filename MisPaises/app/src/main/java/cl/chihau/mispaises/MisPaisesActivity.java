@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MisPaisesActivity extends AppCompatActivity
-        implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class MisPaisesActivity extends AppCompatActivity implements View.OnClickListener,
+        AdapterView.OnItemClickListener {
 
     List countries = new ArrayList();
     ArrayAdapter adapter;
@@ -45,21 +45,35 @@ public class MisPaisesActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         EditText et = (EditText) findViewById(R.id.myedittext);
-        if (et.getText().toString().length() > 0) {
-            if (countries.contains(et.getText().toString())) {
-                Toast.makeText(this, "Este país ya existe en la lista", Toast.LENGTH_LONG).show();
+
+        String country = et.getText().toString();
+
+        country = country.substring(0, 1).toUpperCase() +
+                country.substring(1, country.length()).toLowerCase();
+
+        if (country.length() > 0) {
+            if (countries.contains(country)) {
+                Toast.makeText(this, "Este país ya existe en la lista", Toast.LENGTH_SHORT).show();
             } else {
-                String country = et.getText().toString();
-                countries.add(country.substring(0, 1).toUpperCase() +
-                        country.substring(1, country.length()).toLowerCase());
+                countries.add(country);
                 Collections.sort(countries);
                 adapter.notifyDataSetChanged();
                 et.setText("");
                 saveData();
             }
         } else {
-            Toast.makeText(this, "El campo está vacío", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "El campo está vacío", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+        Uri uri = Uri.parse("http://en.wikipedia.org/wiki/" +
+                Uri.encode(countries.get(pos).toString()));
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
     private void saveData() {
@@ -68,7 +82,7 @@ public class MisPaisesActivity extends AppCompatActivity
         StringBuilder sb = new StringBuilder();
         int i;
         for (i = 0; i < countries.size(); i++) {
-            sb.append( ((i == 0) ? "" : ";")  + countries.get(i));
+            sb.append( ((i == 0) ? "" : ";") + countries.get(i));
         }
 
         spe.putString("countries", sb.toString());
@@ -83,14 +97,5 @@ public class MisPaisesActivity extends AppCompatActivity
         for (String country : countryList.split(";")) {
             countries.add(country);
         }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-        Uri uri = Uri.parse("http://en.wikipedia.org/wiki/" +
-                Uri.encode(countries.get(pos).toString()));
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
     }
 }
