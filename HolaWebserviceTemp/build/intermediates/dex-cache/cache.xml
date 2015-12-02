@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/chihau/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="/Users/chihau/AndroidStudioProjects/HolaWebserviceTemp/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-9ee147ec0b457fbd88d90405d38b11fcfbe4d7f4.jar" />
+    </item>
+    <item
+        jar="/Users/chihau/AndroidStudioProjects/HolaWebserviceTemp/app/libs/ksoap2-android-assembly-3.3.0-jar-with-dependencies.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="62681b8212ca52278feafec31775fd0cb096d99a">
+        <dex dex="/Users/chihau/AndroidStudioProjects/HolaWebserviceTemp/app/build/intermediates/pre-dexed/debug/ksoap2-android-assembly-3.3.0-jar-with-dependencies-08f79ab471288b961ab9b13d1aae89d0b11da10e.jar" />
+    </item>
+
+</items>
