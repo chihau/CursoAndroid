@@ -60,7 +60,7 @@ public class HolaGPSActivity extends Activity {
 	    	//Cuando el proveedor cambia de estado
 	    	//Status: 0 OUT_OF_SERVICE, 1 TEMPORARILY_UNAVAILABLE, 2 AVAILABLE.
 	    	public void onStatusChanged(String provider, int status, Bundle extras){
-	    		Log.i("HelloGPS", "Estado del GPS: " + status);
+	    		Log.i("HolaGPS", "Estado del GPS: " + status);
 	    	}
     	};
     	
