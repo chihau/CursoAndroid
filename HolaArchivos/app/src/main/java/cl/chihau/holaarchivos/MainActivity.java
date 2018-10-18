@@ -1,11 +1,16 @@
 package cl.chihau.holaarchivos;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -16,27 +21,42 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class HolaArchivosActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity {
     TextView txtResultado;
+    Button btnEscribirSD;
+    Button btnLeerSD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
+        txtResultado = findViewById(R.id.txtResultado);
+        btnEscribirSD = findViewById(R.id.btn_escribir_sd);
+        btnLeerSD = findViewById(R.id.btn_leer_sd);
+    }
 
-        txtResultado = (TextView) findViewById(R.id.txtResultado);
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (checkPermission()) {
+            btnEscribirSD.setEnabled(true);
+            btnLeerSD.setEnabled(true);
+        } else {
+            btnEscribirSD.setEnabled(false);
+            btnLeerSD.setEnabled(false);
+            requestPermission();
+        }
     }
 
     public void escribirArchivo(View view) {
         try {
-            OutputStreamWriter fout = new OutputStreamWriter(
-                    openFileOutput("prueba_int.txt", Context.MODE_PRIVATE));
-
-            fout.write("Texto de prueba desde mem interna");
+            FileOutputStream fout = openFileOutput("prueba_int.txt", Context.MODE_PRIVATE);
+            String texto = "Texto de prueba desde memoria interna";
+            fout.write(texto.getBytes());
             fout.close();
             txtResultado.setText("Archivo creado!");
-        } catch (Exception ex) {
+        } catch (Exception e) {
             Log.e("HolaArchivos", "Error al escribir el archivo en memoria interna");
         }
     }
@@ -45,17 +65,16 @@ public class HolaArchivosActivity extends AppCompatActivity {
         try {
             BufferedReader fin = new BufferedReader(new InputStreamReader(
                     openFileInput("prueba_int.txt")));
-
             String texto = fin.readLine();
             fin.close();
             txtResultado.setText(texto);
-        } catch (Exception ex) {
-            Log.e("HolaArchivos", "Error al leer el archivo en memoria interna");
+        } catch (Exception e) {
+            Log.e("HolaArchivo", "Error al leer el archivo en memoria interna");
         }
-
     }
 
     public void escribirSD(View view) {
+
         boolean sdDisponible = false;
         boolean sdAccesoEscritura = false;
 
@@ -84,6 +103,7 @@ public class HolaArchivosActivity extends AppCompatActivity {
                 txtResultado.setText("Archivo SD creado!");
             } catch (Exception ex) {
                 Log.e("HolaArchivos", "Error al escribir el archivo en memoria SD");
+                Log.e("HolaArchivos", ex.getMessage());
             }
         } else {
             Log.e("HolaArchivos", "Error: la tarjeta SD no se encuentra " +
@@ -113,11 +133,42 @@ public class HolaArchivosActivity extends AppCompatActivity {
             BufferedReader brin = new BufferedReader(new InputStreamReader(fraw));
             String texto = brin.readLine();
             fraw.close();
-
             txtResultado.setText(texto);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             Log.e("HolaArchivos", "Error al leer el archivo desde recurso raw");
         }
     }
 
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                200);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 200: {
+                // Si el request es cancelado entonces el arreglo tiene largo 0
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    btnEscribirSD.setEnabled(true);
+                    btnLeerSD.setEnabled(true);
+                } else {
+                    btnEscribirSD.setEnabled(false);
+                    btnLeerSD.setEnabled(false);
+                }
+
+                return;
+            }
+        }
+    }
 }
