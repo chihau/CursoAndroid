@@ -14,6 +14,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
     private static final String TAG = "HolaReceivers";
 
     TextView tvNetwork;
@@ -24,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvNetwork = (TextView) findViewById(R.id.tv_network);
-        tvBattery = (TextView) findViewById(R.id.tv_battery);
+        tvNetwork = findViewById(R.id.tv_network);
+        tvBattery = findViewById(R.id.tv_battery);
     }
 
     @Override
