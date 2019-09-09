@@ -1,8 +1,6 @@
 package cl.chihau.holamapas;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -13,7 +11,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
-
     GoogleMap mapa = null;
 
     @Override
@@ -37,9 +34,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mapa.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
             mapa.addMarker(new MarkerOptions()
-                            .position(new LatLng(-33.036652, -71.595088))
-                            .title("Entrada")
-                            .draggable(true)
+                    .position(new LatLng(-33.036652, -71.595088))
+                    .title("Entrada")
+                    .draggable(true)
             );
 
         } else {
