@@ -4,9 +4,6 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
-/**
- * Created by chihau on 09-11-15.
- */
 public class ServicioDescarga extends IntentService {
     boolean stopped;
 
