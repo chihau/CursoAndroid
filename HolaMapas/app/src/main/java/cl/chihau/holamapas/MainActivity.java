@@ -1,7 +1,6 @@
 package cl.chihau.holamapas;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -9,6 +8,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     GoogleMap mapa = null;
@@ -36,11 +37,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mapa.addMarker(new MarkerOptions()
                     .position(new LatLng(-33.036652, -71.595088))
                     .title("Entrada")
-                    .draggable(true)
-            );
-
+                    .draggable(true));
         } else {
-            Log.e("HolaMapas", "mapa nulo");
+            Log.e("HolaMapas", "Error: mapa igual a null");
         }
     }
 }
