@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">HolaActionBar</string>
-    <string name="action_search">Search</string>
-    <string name="action_settings">Settings</string>
 </resources>

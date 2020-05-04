@@ -1,19 +1,20 @@
 package cl.chihau.holaactionbar;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SearchActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        TextView tv = (TextView) findViewById(R.id.textview1);
+        TextView tv = findViewById(R.id.tv);
         tv.setText("Actividad 2 (Search)");
-    }
 
+    }
 }
