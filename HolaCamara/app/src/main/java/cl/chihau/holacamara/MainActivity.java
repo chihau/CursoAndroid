@@ -3,24 +3,20 @@ package cl.chihau.holacamara;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.Matrix;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.File;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private static final int TAKE_PICTURE = 0;
-    Uri mUri;
-    Bitmap mPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,43 +25,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sacarFoto(View view) {
-        if (view.getId() == R.id.btn_foto &&
-                getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+        if (view.getId() == R.id.btn_foto && getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            // Desde Android 5.1 el método recomendado para acceder a los archivos es utilizando
-            // un FileProvider (que es una subclase de ContentProvider)
-            // antiguamente se accedía directamente a través de la uri file:// pero ahora es
-            // a través de content://
-            Intent i = new Intent("android.media.action.IMAGE_CAPTURE");
-            // Antes era File f = new File(Environment.getExternalStorageDirectory(),  "foto.jpg");
-            File f = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),  "foto.jpg");
-
-            // Antes era mUri = Uri.fromFile(f); // Ej: file://sdcard/foto.jpg
-            mUri = FileProvider.getUriForFile(MainActivity.this,
-                    BuildConfig.APPLICATION_ID + ".provider",
-                    f);
-
-            i.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
-            startActivityForResult(i, TAKE_PICTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, TAKE_PICTURE);
+            } else {
+                Toast.makeText(this, "No existe una aplicación para tomar fotos", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(this, "El dispositivo no tiene cámara", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == Activity.RESULT_OK) {
-                    try {
-                        //Cargamos la imagen guardada en la memoria SD en nuestro ImageView
-                        mPhoto = android.provider.MediaStore.Images.Media.getBitmap(
-                                getContentResolver(), mUri);
-                        ((ImageView)findViewById(R.id.img_foto)).setImageBitmap(mPhoto);
-                    } catch (Exception e) {
-                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e("HolaCamara", e.getMessage());
+                    ImageView imgFoto = findViewById(R.id.img_foto);
+
+                    Bundle extras = data.getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+                    // En algunos dispositivos la app de la cámara funciona siempre en modo landscape
+                    int orientation = getResources().getConfiguration().orientation;
+
+                    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        imgFoto.setImageBitmap(imageBitmap);
+                    } else {
+                        Bitmap imageBitmapRotated = rotateImage(imageBitmap, -90);
+                        imgFoto.setImageBitmap(imageBitmapRotated);
                     }
                 }
         }
+    }
+
+    private Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 }
